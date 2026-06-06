@@ -16,7 +16,6 @@ https://yonatansherer.github.io/tidy-notes-demo/
 
 Add screenshots here after uploading them to the repository.
 
-```md
 ![Tidy Notes Desktop](screenshots/desktop.png)
 ![Tidy Notes Note Modal](screenshots/note-modal.png)
 ![Tidy Notes Mobile](screenshots/mobile.png)
