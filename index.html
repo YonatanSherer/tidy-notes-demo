@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tidy Notes – Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <meta name="theme-color" content="#22c55e" />
+
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <h1>Tidy Notes</h1>
+        <p>Notes that don’t get messy – always easy to find.</p>
+      </div>
+
+      <!-- Language selector -->
+      <select id="lang-select" class="lang-select" aria-label="Language" title="Language">
+        <option value="en">EN</option>
+	<option value="he">HE</option>
+	<option value="zh">中文</option>
+	<option value="es">ES</option>
+      </select>
+
+      <!-- Theme toggle -->
+      <button
+        id="theme-toggle"
+        class="theme-toggle-btn"
+        aria-label="Toggle theme"
+        title="Toggle theme"
+      >
+        🌙
+      </button>
+    </header>
+
+    <!-- Controls -->
+    <section class="controls">
+      <div class="search-wrapper">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search notes…"
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="filters">
+        <span class="filters-label" data-i18n="categoriesLabel"></span>
+
+        <button class="chip chip-active" data-category="all" data-i18n="allLabel"></button>
+        <button class="chip" data-category="idea" data-i18n="categories.idea"></button>
+        <button class="chip" data-category="task" data-i18n="categories.task"></button>
+        <button class="chip" data-category="reminder" data-i18n="categories.reminder"></button>
+        <button class="chip" data-category="shopping" data-i18n="categories.shopping"></button>
+        <button class="chip" data-category="phone" data-i18n="categories.phone"></button>
+        <button class="chip" data-category="email" data-i18n="categories.email"></button>
+        <button class="chip" data-category="family" data-i18n="categories.family"></button>
+        <button class="chip" data-category="quotes" data-i18n="categories.quotes"></button>
+        <button class="chip" data-category="goals" data-i18n="categories.goals"></button>
+        <button class="chip" data-category="finance" data-i18n="categories.finance"></button>
+      </div>
+    </section>
+
+    <!-- SCROLLABLE NOTES AREA -->
+    <div class="notes-scroll">
+
+      <div id="notes-empty" class="empty-state">
+        <p>No notes yet.</p>
+        <p>Tap the <strong>+</strong> button to add your first clean note.</p>
+      </div>
+
+      <div id="notes-container" class="notes-grid"></div>
+
+    </div>
+
+    <!-- Floating Add Button -->
+    <button id="add-note-btn" class="fab" aria-label="Add note">+</button>
+
+    <!-- Category Sliding Sheet -->
+    <div id="category-sheet-backdrop" class="modal-backdrop hidden"></div>
+
+    <div id="category-sheet" class="category-sheet hidden">
+      <h3 data-i18n="selectCategoryTitle"></h3>
+
+      <div class="category-options">
+        <button class="category-option" data-category="idea">💡 <span data-i18n="categories.idea"></span></button>
+        <button class="category-option" data-category="task">📝 <span data-i18n="categories.task"></span></button>
+        <button class="category-option" data-category="reminder">⏰ <span data-i18n="categories.reminder"></span></button>
+        <button class="category-option" data-category="shopping">🛒 <span data-i18n="categories.shopping"></span></button>
+        <button class="category-option" data-category="phone">📞 <span data-i18n="categories.phone"></span></button>
+        <button class="category-option" data-category="email">✉️ <span data-i18n="categories.email"></span></button>
+        <button class="category-option" data-category="family">👨‍👩‍👧 <span data-i18n="categories.family"></span></button>
+        <button class="category-option" data-category="quotes">💬 <span data-i18n="categories.quotes"></span></button>
+        <button class="category-option" data-category="goals">🎯 <span data-i18n="categories.goals"></span></button>
+        <button class="category-option" data-category="finance">💰 <span data-i18n="categories.finance"></span></button>
+      </div>
+
+      <button id="category-cancel" class="category-cancel" data-i18n="modal.cancel"></button>
+    </div>
+
+    <!-- Note Modal -->
+    <div id="note-modal-backdrop" class="modal-backdrop hidden"></div>
+
+    <div id="note-modal" class="modal hidden" aria-hidden="true">
+      <div class="modal-header">
+        <h2 id="modal-title">New Note</h2>
+        <button id="modal-close-btn" class="icon-btn" aria-label="Close">✕</button>
+      </div>
+
+      <form id="note-form" class="modal-body">
+        <div class="form-group">
+          <label for="note-title" data-i18n="modal.titleLabel"></label>
+          <input type="text" id="note-title" name="title" maxlength="80" required />
+        </div>
+
+        <div class="form-group">
+          <label for="note-category" data-i18n="modal.categoryLabel"></label>
+          <select id="note-category" name="category">
+            <option value="idea" data-i18n="categories.idea"></option>
+            <option value="task" data-i18n="categories.task"></option>
+            <option value="reminder" data-i18n="categories.reminder"></option>
+            <option value="shopping" data-i18n="categories.shopping"></option>
+            <option value="phone" data-i18n="categories.phone"></option>
+            <option value="email" data-i18n="categories.email"></option>
+            <option value="family" data-i18n="categories.family"></option>
+            <option value="quotes" data-i18n="categories.quotes"></option>
+            <option value="goals" data-i18n="categories.goals"></option>
+            <option value="finance" data-i18n="categories.finance"></option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="note-content" data-i18n="modal.contentLabel"></label>
+          <textarea
+            id="note-content"
+            name="content"
+            rows="5"
+            data-i18n-placeholder="modal.contentPlaceholder"
+            required
+          ></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" id="modal-cancel-btn" class="btn-secondary" data-i18n="modal.cancel"></button>
+          <button type="submit" class="btn-primary" data-i18n="modal.save"></button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
