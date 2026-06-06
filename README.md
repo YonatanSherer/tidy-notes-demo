@@ -14,8 +14,6 @@ https://yonatansherer.github.io/tidy-notes-demo/
 
 ## Preview
 
-Add screenshots here after uploading them to the repository.
-
 ![Tidy Notes Desktop](screenshots/desktop.png)
 
 ## Features
